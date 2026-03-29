@@ -16,7 +16,7 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-WEATHER_API_KEY = os.environ.get("WEATHER_API_KEY", "")
+weather_key = st.secrets["WEATHER_API_KEY"]
 
 if not WEATHER_API_KEY:
     st.sidebar.warning("⚠️ OpenWeatherMap API Key not set. Using historical data mode only.")
