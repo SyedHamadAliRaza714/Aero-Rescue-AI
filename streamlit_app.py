@@ -396,8 +396,9 @@ def load_who_facilities():
 @st.cache_data(ttl=1800)
 def fetch_nasa_fires():
     """Fetch real-time fire data"""
+    MAPS_KEY = st.secrets["MAPS_KEY"]
     try:
-        url = "https://firms.modaps.eosdis.nasa.gov/api/area/csv/VIIRS_NOAA20_NRT/1/60.0,23.0,77.0,37.0"
+        url = "https://firms.modaps.eosdis.nasa.gov/api/area/csv/{MAPS_KEY}/VIIRS_NOAA20_NRT/1/60.0,23.0,77.0,37.0"
         df = pd.read_csv(url)
         if not df.empty and 'latitude' in df.columns and 'longitude' in df.columns:
             return df[['latitude', 'longitude', 'brightness', 'confidence']]
