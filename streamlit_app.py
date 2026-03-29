@@ -9,9 +9,6 @@ import aiohttp
 from datetime import datetime
 from math import radians, cos, sin, asin, sqrt
 
-st.title("🌍 Aero-Rescue AI Global")
-st.write("Loading data… please wait ⏳")
-
 st.set_page_config(
     page_title="🌍 Aero-Rescue AI Global",
     layout="wide",
@@ -619,5 +616,987 @@ def get_travel_recommendation(start_risk, end_risk, start_city, end_city):
     except:
         return "UNKNOWN", "Unable to calculate recommendation", "gray"
 
+st.markdown("""
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
 
+    /* Global Styles */
+    body {
+        font-family: 'Inter', sans-serif;
+        background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    }
+
+    /* Main Title with Gradient Text */
+    .main-title {
+        font-family: 'Inter', sans-serif;
+        font-size: 3.5rem;
+        font-weight: 800;
+        text-align: center;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 0.5rem;
+        letter-spacing: -0.02em;
+    }
+
+    .subtitle {
+        font-family: 'Inter', sans-serif;
+        text-align: center;
+        color: #64748b;
+        margin-bottom: 2rem;
+        font-size: 1.1rem;
+        font-weight: 400;
+    }
+
+    /* Metric Cards with Glassmorphism */
+    .metric-card {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 1.5rem;
+        border-radius: 16px;
+        margin: 0.5rem 0;
+        box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .metric-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 15px 35px rgba(102, 126, 234, 0.4);
+    }
+
+    /* Success Box with Pulse Animation */
+    .success-box {
+        background: linear-gradient(135deg, #00b894 0%, #00cec9 100%);
+        color: white;
+        padding: 2rem;
+        border-radius: 16px;
+        text-align: center;
+        font-weight: 700;
+        font-size: 1.3rem;
+        box-shadow: 0 10px 25px rgba(0, 184, 148, 0.3);
+        animation: pulse 2s infinite;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    /* Warning Box */
+    .warning-box {
+        background: linear-gradient(135deg, #fdcb6e 0%, #e17055 100%);
+        color: white;
+        padding: 2rem;
+        border-radius: 16px;
+        text-align: center;
+        font-weight: 700;
+        font-size: 1.3rem;
+        box-shadow: 0 10px 25px rgba(253, 203, 110, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    /* Danger Box with Shake Animation */
+    .danger-box {
+        background: linear-gradient(135deg, #d63031 0%, #e84393 100%);
+        color: white;
+        padding: 2rem;
+        border-radius: 16px;
+        text-align: center;
+        font-weight: 700;
+        font-size: 1.3rem;
+        box-shadow: 0 10px 25px rgba(214, 48, 49, 0.3);
+        animation: shake 0.5s;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    /* Info Box */
+    .info-box {
+        background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+        color: white;
+        padding: 1.5rem;
+        border-radius: 12px;
+        margin: 1rem 0;
+        box-shadow: 0 4px 15px rgba(116, 185, 255, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    /* Facility Cards with Hover Effect */
+    .facility-card {
+        background: white;
+        border: 2px solid #e2e8f0;
+        border-radius: 16px;
+        padding: 1.5rem;
+        margin: 0.8rem 0;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        transition: all 0.3s ease;
+    }
+
+    .facility-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+        border-color: #667eea;
+    }
+
+    /* Stat Cards */
+    .stat-card {
+        background: #ffffff;
+        border-left: 5px solid #667eea;
+        padding: 1.2rem;
+        border-radius: 12px;
+        margin: 0.5rem 0;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        transition: all 0.3s ease;
+    }
+
+    .stat-card:hover {
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        transform: translateX(5px);
+    }
+
+    /* Button Styling */
+    .stButton>button {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border: none;
+        padding: 0.75rem 2rem;
+        border-radius: 30px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    }
+
+    .stButton>button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+    }
+
+    /* Emergency Button */
+    .emergency-btn {
+        background: linear-gradient(135deg, #d63031 0%, #e84393 100%) !important;
+        animation: pulse 2s infinite;
+    }
+
+    /* Animations */
+    @keyframes pulse {
+        0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 184, 148, 0.4); }
+        50% { transform: scale(1.02); box-shadow: 0 0 0 10px rgba(0, 184, 148, 0); }
+        100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(0, 184, 148, 0); }
+    }
+
+    @keyframes shake {
+        0%, 100% { transform: translateX(0); }
+        25% { transform: translateX(-5px); }
+        75% { transform: translateX(5px); }
+    }
+
+    /* Sidebar Styling */
+    .sidebar .sidebar-content {
+        background: linear-gradient(180deg, #f8fafc 0%, #e2e8f0 100%);
+    }
+
+    /* Highlight Text */
+    .highlight {
+        background: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+        padding: 0.2rem 0.6rem;
+        border-radius: 6px;
+        font-weight: 600;
+        color: #1e293b;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: #f1f5f9;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border-radius: 4px;
+    }
+
+    /* Risk Level Badges */
+    .risk-badge-good {
+        background: linear-gradient(135deg, #00b894 0%, #00cec9 100%);
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-weight: 600;
+        display: inline-block;
+    }
+
+    .risk-badge-moderate {
+        background: linear-gradient(135deg, #fdcb6e 0%, #f39c12 100%);
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-weight: 600;
+        display: inline-block;
+    }
+
+    .risk-badge-unhealthy {
+        background: linear-gradient(135deg, #e17055 0%, #d63031 100%);
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-weight: 600;
+        display: inline-block;
+    }
+
+    .risk-badge-hazardous {
+        background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-weight: 600;
+        display: inline-block;
+    }
+
+    /* Progress Bar Customization */
+    .stProgress > div > div {
+        background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+        border-radius: 10px;
+    }
+
+    /* Expander Styling */
+    .streamlit-expanderHeader {
+        background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        border-radius: 8px;
+        border: 1px solid #e2e8f0;
+    }
+
+    /* Selectbox and Input Styling */
+    .stSelectbox, .stTextInput, .stSlider {
+        background: white;
+        border-radius: 8px;
+        border: 1px solid #e2e8f0;
+    }
+
+    /* Divider Styling */
+    hr {
+        border: none;
+        height: 2px;
+        background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+        margin: 2rem 0;
+    }
+
+    /* Welcome Card */
+    .welcome-card {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 3rem;
+        border-radius: 24px;
+        text-align: center;
+        margin: 2rem 0;
+        box-shadow: 0 20px 40px rgba(102, 126, 234, 0.3);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .welcome-card::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+        animation: rotate 20s linear infinite;
+    }
+
+    @keyframes rotate {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    /* Feature Cards */
+    .feature-card {
+        background: white;
+        padding: 2rem;
+        border-radius: 16px;
+        text-align: center;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        transition: all 0.3s ease;
+        border: 1px solid #e2e8f0;
+    }
+
+    .feature-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 30px rgba(0,0,0,0.1);
+    }
+
+    /* Emergency Protocol Cards */
+    .emergency-card {
+        background: white;
+        border-left: 5px solid;
+        padding: 1.5rem;
+        border-radius: 12px;
+        margin: 0.5rem 0;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+
+    .emergency-card-warning {
+        border-color: #f59e0b;
+        background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+    }
+
+    .emergency-card-info {
+        border-color: #3b82f6;
+        background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+    }
+
+    .emergency-card-success {
+        border-color: #10b981;
+        background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+    }
+</style>
+""", unsafe_allow_html=True)
+
+cities = load_cities()
+who_facilities = load_who_facilities()
+pak_aqi = load_pakistan_aqi()
+pollen_data = load_pollen_data()
+
+st.markdown('<h1 class="main-title">🌍 Aero-Rescue AI Global</h1>', unsafe_allow_html=True)
+st.markdown('<p class="subtitle">200+ Cities • 80+ Countries • Real-time Air Quality • Health Risk Assessment</p>', unsafe_allow_html=True)
+
+with st.sidebar:
+    st.image("https://img.icons8.com/color/96/lungs.png", width=80)
+    st.title("🌐 Global Navigation")
+
+    try:
+        facility_count = len(who_facilities) if who_facilities is not None and not who_facilities.empty else 0
+    except:
+        facility_count = 0
+
+    st.markdown("""
+    <div style='background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 1.2rem; border-radius: 12px; margin-bottom: 1.5rem; color: white; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);'>
+        <div style='font-size: 0.85rem; opacity: 0.9; margin-bottom: 0.5rem;'>📊 Global Coverage</div>
+        <div style='font-size: 1.1rem; font-weight: 600;'>
+            🌍 {} Countries<br>
+            🏙️ {} Cities<br>
+            🏥 {} Facilities
+        </div>
+    </div>
+    """.format(len(set(c["country"] for c in cities.values())), len(cities), facility_count), unsafe_allow_html=True)
+
+    countries = sorted(list(set([c["country"] for c in cities.values()])))
+
+    col1, col2 = st.columns(2)
+    with col1:
+        c_from = st.selectbox("From", ["All"] + countries, key="c_from")
+    with col2:
+        c_to = st.selectbox("To", ["All"] + countries, key="c_to")
+
+    from_cities = [k for k, v in cities.items() if v["country"] == c_from] if c_from != "All" else list(cities.keys())
+    to_cities = [k for k, v in cities.items() if v["country"] == c_to] if c_to != "All" else list(cities.keys())
+
+    current = st.selectbox(
+        "🏙️ Origin City",
+        from_cities,
+        index=from_cities.index(st.session_state.current) if st.session_state.current in from_cities else 0,
+        key="current"
+    )
+    destination = st.selectbox(
+        "🎯 Destination City",
+        to_cities,
+        index=to_cities.index(st.session_state.destination) if st.session_state.destination in to_cities else 0,
+        key="destination"
+    )
+
+    from_c = cities[current]["country"]
+    to_c = cities[destination]["country"]
+
+    if cities[current].get("detailed"):
+        st.success("📊 Pakistan EPA Data (Detailed)")
+    else:
+        st.info(f"🌍 WHO Global Data")
+
+    st.info(f"🛫 {from_c} → 🛬 {to_c}")
+
+    st.divider()
+
+    st.subheader("✈️ Travel Mode")
+
+    if 'vehicle_type' not in st.session_state:
+        st.session_state.vehicle_type = "AC Vehicle"
+
+    travel_mode = st.radio(
+        "Select mode",
+        ["Flight", "Train", "Car", "Bus"],
+        horizontal=True,
+        key="sel_travel_mode",
+        index=["Flight", "Train", "Car", "Bus"].index(st.session_state.sel_travel_mode)
+    )
+
+    vehicle_type = st.session_state.vehicle_type
+    if travel_mode in ["Car", "Bus"]:
+        vehicle_type = st.selectbox(
+            "Vehicle Type",
+            ["AC Vehicle", "Non-AC Vehicle", "Electric Vehicle"],
+            key="vehicle_type_select",
+            index=["AC Vehicle", "Non-AC Vehicle", "Electric Vehicle"].index(st.session_state.vehicle_type)
+        )
+        st.session_state.vehicle_type = vehicle_type
+
+    st.divider()
+
+    st.subheader("🏥 Health Profile")
+    condition = st.selectbox(
+        "Medical Condition",
+        ["Asthma", "COPD", "Allergies", "Bronchitis", "Heart Disease", "Pregnancy", "Healthy"],
+        key="condition",
+        index=["Asthma", "COPD", "Allergies", "Bronchitis", "Heart Disease", "Pregnancy", "Healthy"].index(st.session_state.condition)
+    )
+
+    severity = st.slider(
+        "Severity Level",
+        1, 5,
+        st.session_state.severity,
+        key="severity"
+    )
+
+    risk_mult = {"Asthma": 2.0, "COPD": 2.8, "Allergies": 1.6, "Bronchitis": 2.2, "Heart Disease": 2.5, "Pregnancy": 1.4, "Healthy": 1.0}[condition]
+    st.caption(f"Risk Multiplier: {risk_mult}x")
+
+    st.divider()
+
+    st.subheader("🚨 Emergency Contact")
+    emergency_contact = st.text_input(
+        "Phone Number",
+        st.session_state.emergency_contact,
+        key="emergency_contact"
+    )
+
+    st.divider()
+
+    st.subheader("🔥 Environmental Factors")
+    wildfire = st.checkbox("🔥 Wildfire Event (+80 PM2.5)", key="wild")
+    smog = st.checkbox("🌫️ Smog Event (+100 PM2.5)", key="smog")
+    dust_storm = st.checkbox("🌪️ Dust Storm (+60 PM2.5)", key="dust")
+
+    st.divider()
+
+    col1, col2 = st.columns(2)
+    with col1:
+        if st.button("🔄 Reset", use_container_width=True):
+            st.session_state.analysis_done = False
+            st.session_state.results = None
+            st.rerun()
+    with col2:
+        if st.button("📊 New Analysis", use_container_width=True, type="primary"):
+            st.session_state.analysis_done = False
+            st.rerun()
+
+if current == destination:
+    st.warning("⚠️ Please select different origin and destination cities")
+else:
+    if not st.session_state.analysis_done:
+        col1, col2 = st.columns(2)
+        with col1:
+            st.markdown(f"""
+            <div class='stat-card'>
+                <h3 style='color: #1e293b; margin-bottom: 0.5rem;'>🛫 {current}</h3>
+                <p style='color: #64748b; line-height: 1.6;'>
+                <span style='color: #667eea; font-weight: 600;'>Country:</span> {from_c}<br>
+                <span style='color: #667eea; font-weight: 600;'>Population:</span> {cities[current]['pop']}<br>
+                <span style='color: #667eea; font-weight: 600;'>Region:</span> {cities[current]['region']}</p>
+            </div>
+            """, unsafe_allow_html=True)
+        with col2:
+            st.markdown(f"""
+            <div class='stat-card'>
+                <h3 style='color: #1e293b; margin-bottom: 0.5rem;'>🛬 {destination}</h3>
+                <p style='color: #64748b; line-height: 1.6;'>
+                <span style='color: #667eea; font-weight: 600;'>Country:</span> {to_c}<br>
+                <span style='color: #667eea; font-weight: 600;'>Population:</span> {cities[destination]['pop']}<br>
+                <span style='color: #667eea; font-weight: 600;'>Region:</span> {cities[destination]['region']}</p>
+            </div>
+            """, unsafe_allow_html=True)
+
+        col1, col2, col3 = st.columns([1, 2, 1])
+        with col2:
+            if st.button("🚀 ANALYZE SAFE ROUTE", type="primary", use_container_width=True):
+                with st.spinner("🔍 Analyzing air quality data..."):
+                    progress_bar = st.progress(0)
+
+                    start_d = cities[current]
+                    end_d = cities[destination]
+
+                    current_travel_mode = st.session_state.sel_travel_mode
+                    current_vehicle_type = st.session_state.get('vehicle_type', 'AC Vehicle')
+                    current_condition = st.session_state.condition
+                    current_severity = st.session_state.severity
+
+                    progress_bar.progress(10)
+
+                    async def get_data():
+                        async with aiohttp.ClientSession() as session:
+                            return await asyncio.gather(
+                                fetch_aqi_data(session, start_d['lat'], start_d['lon']),
+                                fetch_aqi_data(session, end_d['lat'], end_d['lon'])
+                            )
+
+                    try:
+                        loop = asyncio.new_event_loop()
+                        asyncio.set_event_loop(loop)
+                        start_aqi, end_aqi = loop.run_until_complete(get_data())
+                        loop.close()
+                        api_status = "✅ Live OpenWeatherMap API"
+                    except Exception as e:
+                        start_aqi, end_aqi = None, None
+                        api_status = "📊 Historical Data Mode"
+                        st.info("Using historical air quality data (API not available)")
+
+                    progress_bar.progress(40)
+                    start_season = get_seasonal_data(current, cities, pak_aqi, pollen_data)
+                    end_season = get_seasonal_data(destination, cities, pak_aqi, pollen_data)
+
+                    if wildfire:
+                        start_season['pm25'] += 80
+                        end_season['pm25'] += 80
+                    if smog:
+                        start_season['pm25'] += 100
+                        end_season['pm25'] += 100
+                    if dust_storm:
+                        start_season['pm25'] += 60
+                        end_season['pm25'] += 60
+
+                    progress_bar.progress(60)
+                    start_risk, start_pm25 = calculate_risk(
+                        start_aqi, start_season, current_condition, current_severity,
+                        current_travel_mode, current_vehicle_type
+                    )
+                    end_risk, end_pm25 = calculate_risk(
+                        end_aqi, end_season, current_condition, current_severity,
+                        current_travel_mode, current_vehicle_type
+                    )
+
+                    start_lvl, start_emoji, start_msg, start_rec = get_risk_level(start_risk)
+                    end_lvl, end_emoji, end_msg, end_rec = get_risk_level(end_risk)
+
+                    progress_bar.progress(80)
+                    dest_city_name = destination.split(',')[0]
+
+                    nearby = pd.DataFrame()
+                    try:
+                        if who_facilities is not None and not who_facilities.empty:
+                            nearby = who_facilities[who_facilities['city'] == dest_city_name].copy()
+
+                            if nearby.empty:
+                                who_facilities_copy = who_facilities.copy()
+                                who_facilities_copy['dist'] = who_facilities_copy.apply(
+                                    lambda r: haversine(end_d['lat'], end_d['lon'], r['lat'], r['lon']), axis=1
+                                )
+                                nearby = who_facilities_copy.nsmallest(5, 'dist')
+                    except Exception as e:
+                        st.warning(f"Could not load nearby facilities: {str(e)}")
+                        nearby = pd.DataFrame()
+
+                    progress_bar.progress(90)
+                    fire_data = fetch_nasa_fires()
+                    fires = []
+                    if not fire_data.empty:
+                        mid_lat = (start_d['lat'] + end_d['lat']) / 2
+                        mid_lon = (start_d['lon'] + end_d['lon']) / 2
+                        for _, f in fire_data.iterrows():
+                            if haversine(mid_lat, mid_lon, f['latitude'], f['longitude']) < 150:
+                                fires.append({
+                                    'lat': f['latitude'],
+                                    'lon': f['longitude'],
+                                    'conf': f['confidence'],
+                                    'bright': f['brightness']
+                                })
+
+                    rec_status, rec_msg, rec_color = get_travel_recommendation(start_risk, end_risk, current, destination)
+
+                    progress_bar.progress(100)
+
+                    st.session_state.results = {
+                        'start_aqi': start_aqi, 'end_aqi': end_aqi,
+                        'start_risk': start_risk, 'end_risk': end_risk,
+                        'start_pm25': start_pm25, 'end_pm25': end_pm25,
+                        'start_lvl': start_lvl, 'start_emoji': start_emoji,
+                        'start_msg': start_msg, 'start_rec': start_rec,
+                        'start_season': start_season, 'start_d': start_d,
+                        'end_lvl': end_lvl, 'end_emoji': end_emoji,
+                        'end_msg': end_msg, 'end_rec': end_rec,
+                        'end_season': end_season, 'end_d': end_d,
+                        'nearby': nearby, 'api_status': api_status,
+                        'from_c': from_c, 'to_c': to_c,
+                        'fires': fires, 'fire_count': len(fires),
+                        'travel_mode': current_travel_mode,
+                        'vehicle_type': current_vehicle_type,
+                        'rec_status': rec_status, 'rec_msg': rec_msg, 'rec_color': rec_color,
+                        'distance': haversine(start_d['lat'], start_d['lon'], end_d['lat'], end_d['lon'])
+                    }
+                    st.session_state.analysis_done = True
+                    st.rerun()
+
+    if st.session_state.analysis_done and st.session_state.results:
+        r = st.session_state.results
+
+        from_em = get_emergency_num(r['from_c'])
+        to_em = get_emergency_num(r['to_c'])
+
+        st.markdown("---")
+        metric_cols = st.columns(5)
+        metrics = [
+            ("Data Source", r['api_status'], "📡"),
+            ("Travel Mode", f"{r['travel_mode']} ({r.get('vehicle_type', 'N/A')})", "✈️"),
+            ("Distance", f"{r['distance']:.0f} km", "📏"),
+            ("Fire Alerts", f"{r['fire_count']} Active" if r['fire_count'] else "None", "🔥"),
+            ("WHO Facilities", f"{facility_count} Global", "🏥")
+        ]
+        for col, (label, value, icon) in zip(metric_cols, metrics):
+            with col:
+                st.markdown(f"""
+                <div style='text-align: center; padding: 1.2rem; background: white; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); border: 1px solid #e2e8f0;'>
+                    <div style='font-size: 2rem; margin-bottom: 0.5rem;'>{icon}</div>
+                    <div style='font-size: 0.85rem; color: #64748b; margin-bottom: 0.25rem;'>{label}</div>
+                    <div style='font-size: 1rem; font-weight: 600; color: #1e293b;'>{value}</div>
+                </div>
+                """, unsafe_allow_html=True)
+
+        st.markdown(f"""
+        <div class='info-box' style='margin-top: 1.5rem;'>
+            <h4 style='margin-bottom: 0.5rem;'>🚨 Emergency Numbers</h4>
+            <div style='display: flex; gap: 2rem; flex-wrap: wrap;'>
+                <div><b>{r['from_c']}:</b> {from_em}</div>
+                <div><b>{r['to_c']}:</b> {to_em}</div>
+                <div><b>Your Contact:</b> {st.session_state.emergency_contact}</div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+
+        st.markdown(f"""
+        <h2 style='text-align: center; margin: 2rem 0; color: #1e293b;'>
+            🛫 {current} <span style='color: #667eea;'>→</span> {destination}
+        </h2>
+        """, unsafe_allow_html=True)
+
+        if r['start_season'].get('detailed'):
+            st.success(f"📊 Pakistan EPA 2021-2024 Detailed Data for {current.split(',')[0]}")
+        if r['end_season'].get('detailed'):
+            st.success(f"📊 Pakistan EPA 2021-2024 Detailed Data for {destination.split(',')[0]}")
+
+        st.header("📊 Air Quality Risk Assessment")
+        col1, col2 = st.columns(2)
+
+        with col1:
+            st.subheader(f"📍 Origin: {current.split(',')[0]}")
+
+            risk_class = "risk-badge-good" if r['start_risk'] < 50 else ("risk-badge-moderate" if r['start_risk'] < 150 else "risk-badge-unhealthy")
+            st.markdown(f"<div class='{risk_class}' style='margin-bottom: 1rem;'>{r['start_lvl']}</div>", unsafe_allow_html=True)
+
+            st.markdown(f"<h1 style='text-align: center; font-size: 4rem; margin: 1rem 0;'>{r['start_emoji']}</h1>", unsafe_allow_html=True)
+
+            st.progress(min(r['start_risk'] / 500, 1.0))
+            st.markdown(f"<p style='text-align: center; color: #64748b;'><b>Risk Score: {r['start_risk']:.0f}/500</b></p>", unsafe_allow_html=True)
+
+            with st.container():
+                st.markdown('<div class="metric-card">', unsafe_allow_html=True)
+                cols = st.columns(2)
+                with cols[0]:
+                    st.metric("PM2.5", f"{r['start_pm25']:.1f} μg/m³")
+                    st.metric("Live AQI", f"{r['start_aqi']['aqi']}/5" if r['start_aqi'] else "N/A")
+                with cols[1]:
+                    st.metric("Season", r['start_season']['season'])
+                    st.metric("Pollen", r['start_season']['pollen'])
+                st.markdown('</div>', unsafe_allow_html=True)
+
+            with st.expander("📋 Detailed Information"):
+                st.write(f"**Data Source:** {r['start_season']['source']}")
+                st.write(f"**Region:** {r['start_season']['region']}")
+                if r['start_season'].get('health_advice'):
+                    st.info(f"💡 {r['start_season']['health_advice']}")
+                if r['start_season']['smog']:
+                    st.error("⚠️ SMOG ALERT: High pollution season")
+
+            st.info(f"🩺 {r['start_msg']}")
+
+        with col2:
+            st.subheader(f"🏁 Destination: {destination.split(',')[0]}")
+
+            risk_class = "risk-badge-good" if r['end_risk'] < 50 else ("risk-badge-moderate" if r['end_risk'] < 150 else ("risk-badge-unhealthy" if r['end_risk'] < 300 else "risk-badge-hazardous"))
+            st.markdown(f"<div class='{risk_class}' style='margin-bottom: 1rem;'>{r['end_lvl']}</div>", unsafe_allow_html=True)
+
+            st.markdown(f"<h1 style='text-align: center; font-size: 4rem; margin: 1rem 0;'>{r['end_emoji']}</h1>", unsafe_allow_html=True)
+
+            st.progress(min(r['end_risk'] / 500, 1.0))
+            st.markdown(f"<p style='text-align: center; color: #64748b;'><b>Risk Score: {r['end_risk']:.0f}/500</b></p>", unsafe_allow_html=True)
+
+            with st.container():
+                st.markdown('<div class="metric-card">', unsafe_allow_html=True)
+                cols = st.columns(2)
+                with cols[0]:
+                    st.metric("PM2.5", f"{r['end_pm25']:.1f} μg/m³")
+                    st.metric("Live AQI", f"{r['end_aqi']['aqi']}/5" if r['end_aqi'] else "N/A")
+                with cols[1]:
+                    st.metric("Season", r['end_season']['season'])
+                    st.metric("Pollen", r['end_season']['pollen'])
+                st.markdown('</div>', unsafe_allow_html=True)
+
+            with st.expander("📋 Detailed Information"):
+                st.write(f"**Data Source:** {r['end_season']['source']}")
+                st.write(f"**Region:** {r['end_season']['region']}")
+                if r['end_season'].get('health_advice'):
+                    st.info(f"💡 {r['end_season']['health_advice']}")
+                if r['end_season']['smog']:
+                    st.error("⚠️ SMOG ALERT: High pollution season")
+
+            st.info(f"🩺 {r['end_msg']}")
+
+        st.markdown("---")
+        st.header("🧭 Travel Safety Verdict")
+
+        if r['rec_color'] == "green":
+            st.markdown(f'<div class="success-box">{r["rec_msg"]}</div>', unsafe_allow_html=True)
+        elif r['rec_color'] == "red":
+            st.markdown(f'<div class="danger-box">{r["rec_msg"]}</div>', unsafe_allow_html=True)
+            if r['end_risk'] > 250:
+                st.error("🚨 CRITICAL WARNING: Medical emergency risk at destination. Consult doctor before travel.")
+        else:
+            st.markdown(f'<div class="warning-box">{r["rec_msg"]}</div>', unsafe_allow_html=True)
+
+        if r['fire_count'] > 0:
+            st.error(f"""
+            🔥 **WILDFIRE ALERT**: {r['fire_count']} active fire(s) detected within 150km of your route!
+            This may significantly impact air quality during travel.
+            """)
+
+        st.markdown("---")
+        st.header("🗺️ Clean Air Route Map")
+
+        center = [(r['start_d']['lat'] + r['end_d']['lat'])/2, (r['start_d']['lon'] + r['end_d']['lon'])/2]
+        zoom = 3 if r['distance'] > 3000 else (4 if r['distance'] > 1500 else 5)
+
+        m = folium.Map(location=center, zoom_start=zoom, tiles='CartoDB positron')
+
+        route_color = "green" if r['rec_color'] == "green" else ("red" if r['rec_color'] == "red" else "orange")
+        folium.PolyLine(
+            [[r['start_d']['lat'], r['start_d']['lon']], [r['end_d']['lat'], r['end_d']['lon']]],
+            color=route_color, weight=6, opacity=0.9, tooltip=f"Risk Level: {r['end_lvl']}"
+        ).add_to(m)
+
+        folium.Marker(
+            [r['start_d']['lat'], r['start_d']['lon']],
+            popup=f"<b>{current}</b><br>Risk: {r['start_lvl']}<br>PM2.5: {r['start_pm25']:.1f}",
+            icon=folium.Icon(color='blue', icon='plane-departure', prefix='fa')
+        ).add_to(m)
+
+        folium.Marker(
+            [r['end_d']['lat'], r['end_d']['lon']],
+            popup=f"<b>{destination}</b><br>Risk: {r['end_lvl']}<br>PM2.5: {r['end_pm25']:.1f}",
+            icon=folium.Icon(color='red', icon='plane-arrival', prefix='fa')
+        ).add_to(m)
+
+        for f in r['fires']:
+            folium.CircleMarker(
+                [f['lat'], f['lon']],
+                radius=10,
+                color='red',
+                fill=True,
+                fill_color='red',
+                fill_opacity=0.7,
+                popup=f"🔥 Wildfire<br>Confidence: {f['conf']}<br>Brightness: {f['bright']}"
+            ).add_to(m)
+
+        try:
+            if r['nearby'] is not None and not r['nearby'].empty:
+                for _, row in r['nearby'].iterrows():
+                    color = 'green' if row['type'] == 'Hospital' else 'orange'
+                    icon = 'hospital' if row['type'] == 'Hospital' else 'plus'
+                    folium.Marker(
+                        [row['lat'], row['lon']],
+                        popup=f"""
+                        <b>{row['name']}</b><br>
+                        Type: {row['type']}<br>
+                        Phone: {row['phone']}<br>
+                        {'🟢 Oxygen' if row['oxygen'] else '🔴 No Oxygen'}<br>
+                        {'🚨 24/7 Emergency' if row['emergency'] else '⏰ Limited Hours'}
+                        """,
+                        icon=folium.Icon(color=color, icon=icon, prefix='fa')
+                    ).add_to(m)
+        except Exception as e:
+            st.warning("Could not display all facilities on map")
+
+        st_folium(m, width=1000, height=600)
+
+        st.markdown("---")
+        st.header(f"🏥 Medical Facilities Near {destination.split(',')[0]}")
+
+        try:
+            if r['nearby'] is not None and not r['nearby'].empty:
+                for _, row in r['nearby'].iterrows():
+                    with st.container():
+                        st.markdown('<div class="facility-card">', unsafe_allow_html=True)
+                        fcol1, fcol2, fcol3, fcol4 = st.columns([2, 2, 2, 2])
+
+                        with fcol1:
+                            icon = "🏥" if row['type'] == 'Hospital' else "💊"
+                            st.subheader(f"{icon} {row['name']}")
+                            st.caption(f"📍 {row.get('address', row['city'])}, {row.get('country', '')}")
+
+                        with fcol2:
+                            st.write(f"📞 **{row['phone']}**")
+                            st.write(f"**Type:** {row['type']}")
+
+                        with fcol3:
+                            services = []
+                            if row['oxygen']: services.append("🟢 Oxygen")
+                            if row['icu']: services.append("🏥 ICU")
+                            if row['ventilator']: services.append("🔌 Ventilator")
+                            if row['emergency']: services.append("🚨 24/7")
+                            st.write("**Services:**")
+                            for s in services:
+                                st.write(s)
+
+                        with fcol4:
+                            if row.get('dist'):
+                                st.write(f"📏 **{row['dist']:.1f} km** from destination")
+                            st.write(f"**City:** {row['city']}")
+
+                        st.markdown('</div>', unsafe_allow_html=True)
+            else:
+                st.warning("⚠️ No WHO-listed facilities found in this city. Contact local emergency services.")
+                st.info(f"🚨 Emergency Number for {r['to_c']}: **{to_em}**")
+        except Exception as e:
+            st.error(f"Error displaying facilities: {str(e)}")
+            st.info(f"🚨 Emergency Number for {r['to_c']}: **{to_em}**")
+
+        st.markdown("---")
+        st.header("🚨 Emergency Action Protocol")
+
+        ecol1, ecol2, ecol3 = st.columns(3)
+
+        with ecol1:
+            st.markdown("""
+            <div class='emergency-card emergency-card-warning'>
+                <h4 style='color: #92400e; margin-bottom: 1rem;'>📞 Emergency Numbers</h4>
+                <p style='color: #78350f; line-height: 1.8;'>
+                <b>Origin ({}):</b><br>{}<br><br>
+                <b>Destination ({}):</b><br>{}<br><br>
+                <b>Your Contact:</b><br>{}</p>
+            </div>
+            """.format(r['from_c'], from_em, r['to_c'], to_em, st.session_state.emergency_contact), unsafe_allow_html=True)
+
+        with ecol2:
+            st.markdown("""
+            <div class='emergency-card emergency-card-info'>
+                <h4 style='color: #1e40af; margin-bottom: 1rem;'>💊 Medical Kit</h4>
+                <ul style='color: #1e3a8a; line-height: 2;'>
+                    <li>Rescue inhaler (2x)</li>
+                    <li>N95/N99 masks (pack)</li>
+                    <li>Pulse oximeter</li>
+                    <li>Prescription meds</li>
+                    <li>Antihistamines</li>
+                </ul>
+            </div>
+            """, unsafe_allow_html=True)
+
+        with ecol3:
+            st.markdown("""
+            <div class='emergency-card emergency-card-success'>
+                <h4 style='color: #065f46; margin-bottom: 1rem;'>✅ Pre-Travel Checklist</h4>
+                <ul style='color: #064e3b; line-height: 2;'>
+                    <li>Doctor consultation</li>
+                    <li>Travel insurance</li>
+                    <li>Hospital locations saved</li>
+                    <li>Air quality app installed</li>
+                    <li>Emergency contacts shared</li>
+                </ul>
+            </div>
+            """, unsafe_allow_html=True)
+
+        st.markdown("---")
+        if st.button(f"🚨 ACTIVATE EMERGENCY PROTOCOL - Call {to_em}", type="primary", use_container_width=True, key="emergency_btn"):
+            nearest_hospital = "Search local hospitals"
+            try:
+                if r['nearby'] is not None and not r['nearby'].empty:
+                    nearest_hospital = r['nearby'].iloc[0]['name']
+            except:
+                pass
+
+            st.markdown(f"""
+            <div class='danger-box'>
+                <h2>🚨 EMERGENCY PROTOCOL ACTIVATED</h2>
+                <p><b>Dialing:</b> {to_em}</p>
+                <p><b>Location:</b> {destination}</p>
+                <p><b>Condition:</b> {st.session_state.condition} (Severity: {st.session_state.severity}/5)</p>
+                <p><b>Notifying:</b> {st.session_state.emergency_contact}</p>
+                <p><b>Nearest Hospital:</b> {nearest_hospital}</p>
+            </div>
+            """, unsafe_allow_html=True)
+
+        st.markdown("---")
+        st.header("📚 Integrated Data Sources")
+
+        dcol1, dcol2, dcol3 = st.columns(3)
+
+        with dcol1:
+            st.subheader("🇵🇰 Pakistan (Primary)")
+            st.write("✅ **Pakistan EPA Air Quality**")
+            st.caption("2021-2024 | 12 cities | Monthly PM2.5")
+            st.write("✅ **WHO Health Facilities**")
+            st.caption("20 hospitals + 4 pharmacies")
+            st.write("✅ **Pollen Monitoring Study**")
+            st.caption("2023 | Rawalpindi/Islamabad/Lahore")
+
+        with dcol2:
+            st.subheader("🌍 Global Coverage")
+            st.write("🌐 **OpenWeatherMap API**")
+            st.caption("Real-time global AQI")
+            st.write("🛰️ **NASA FIRMS**")
+            st.caption("Active fire detection")
+            st.write("📊 **WHO Regional Data**")
+            st.caption("80+ countries baseline")
+
+        with dcol3:
+            st.subheader("🏥 Medical Network")
+            st.write("🏥 **WHO Facilities Database**")
+            st.caption("Verified hospitals worldwide")
+            st.write("🚑 **Emergency Numbers**")
+            st.caption("Country-specific services")
+            st.write("💊 **Pharmacy Network**")
+            st.caption("24/7 medication access")
+
+if not st.session_state.analysis_done:
+    st.markdown("""
+    <div class='welcome-card'>
+        <h1 style='position: relative; z-index: 1;'>👋 Welcome to Aero-Rescue AI Global</h1>
+        <p style='font-size: 1.3rem; position: relative; z-index: 1; opacity: 0.95;'>Your intelligent companion for safe travel with respiratory conditions</p>
+    </div>
+    """, unsafe_allow_html=True)
+
+    col1, col2, col3 = st.columns(3)
+
+    with col1:
+        st.markdown("""
+        <div class='feature-card'>
+            <div style='font-size: 3.5rem; margin-bottom: 1rem;'>🌍</div>
+            <h3 style='color: #1e293b; margin-bottom: 0.5rem;'>Global Coverage</h3>
+            <p style='color: #64748b;'>200+ cities across 80+ countries with real-time air quality data</p>
+        </div>
+        """, unsafe_allow_html=True)
+
+    with col2:
+        st.markdown("""
+        <div class='feature-card'>
+            <div style='font-size: 3.5rem; margin-bottom: 1rem;'>🏥</div>
+            <h3 style='color: #1e293b; margin-bottom: 0.5rem;'>Medical Network</h3>
+            <p style='color: #64748b;'>WHO-verified hospitals and pharmacies with emergency services</p>
+        </div>
+        """, unsafe_allow_html=True)
+
+    with col3:
+        st.markdown("""
+        <div class='feature-card'>
+            <div style='font-size: 3.5rem; margin-bottom: 1rem;'>🤖</div>
+            <h3 style='color: #1e293b; margin-bottom: 0.5rem;'>AI Risk Assessment</h3>
+            <p style='color: #64748b;'>Personalized health risk analysis based on your medical profile</p>
+        </div>
+        """, unsafe_allow_html=True)
+
+    st.info("👈 **Get Started:** Select your origin and destination cities from the sidebar, then click 'ANALYZE SAFE ROUTE'")
 
