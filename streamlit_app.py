@@ -9,6 +9,9 @@ import aiohttp
 from datetime import datetime
 from math import radians, cos, sin, asin, sqrt
 
+st.title("🌍 Aero-Rescue AI Global")
+st.write("Loading data… please wait ⏳")
+
 st.set_page_config(
     page_title="🌍 Aero-Rescue AI Global",
     layout="wide",
