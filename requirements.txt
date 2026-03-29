@@ -1,10 +1,8 @@
-Tech-stack required to install:
-streamlit 
-folium 
-streamlit-folium 
-pandas 
-aiohttp 
-requests 
-numpy 
-Pillow 
-pyngrok==7.2.0
+streamlit
+folium
+streamlit-folium
+pandas
+aiohttp
+requests
+numpy
+Pillow
