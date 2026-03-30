@@ -11,6 +11,9 @@ An intelligent, data-driven travel companion designed to calculate environmental
 
 Aero-Rescue AI Global is a comprehensive health and travel safety platform. It evaluates real-time environmental threats—such as smog, pollen, and active wildfires—and cross-references them with a user's specific medical profile (e.g., Asthma, COPD) to generate a personalized Travel Safety Verdict. The platform covers over 200 cities across 80+ countries and integrates a global network of WHO-verified medical facilities.
 
+## Streamlit App link
+https://aero-rescue-ai.streamlit.app/
+
 ## ✨ Key Features
 
 ### 🤖 Personalized Health Risk AI
