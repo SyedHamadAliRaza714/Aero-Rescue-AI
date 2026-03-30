@@ -1,184 +1,129 @@
-# 🏆 Aero-Rescue AI Global
+# 🌍 Aero-Rescue AI Global
+![Python](https://img.shields.io/badge/Python-3.8%2B-blue?logo=python&logoColor=white)
+![Streamlit](https://img.shields.io/badge/Streamlit-Framework-FF4B4B?logo=streamlit&logoColor=white)
+![Pandas](https://img.shields.io/badge/Pandas-Data_Analysis-150458?logo=pandas&logoColor=white)
+![Folium](https://img.shields.io/badge/Folium-Interactive_Maps-77B829)
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 
-An advanced, data-driven web application for analyzing and ranking environmental safety across multiple metrics. Built with Streamlit, Python, and modern AI technologies.
-  
+An intelligent, data-driven travel companion designed to calculate environmental health risks, track real-time air quality, and ensure the safety of travelers with respiratory conditions globally.
+
 ## 📋 Overview
 
-The Aero-Rescue AI is a comprehensive analytics platform that processes global environmental statistics and generates detailed safety insights, rankings, and visualizations. It features an intuitive web interface with real-time data processing and interactive analytics.
+Aero-Rescue AI Global is a comprehensive health and travel safety platform. It evaluates real-time environmental threats—such as smog, pollen, and active wildfires—and cross-references them with a user's specific medical profile (e.g., Asthma, COPD) to generate a personalized Travel Safety Verdict. The platform covers over 200 cities across 80+ countries and integrates a global network of WHO-verified medical facilities.
 
 ## ✨ Key Features
 
-### 📊 Advanced Analytics
-* **Multi-Metric Scoring System** - Weighted formula considering AQI, Thermal Anomalies, Wind Speed, and Humidity
-* **Performance Tier Classification** - Automatic categorization into Elite Safe, Strong Safe, Average, and Hazard tiers
-* **Statistical Insights** - Highest, lowest, and average risk scores with comprehensive breakdowns
-* **Category Leaders** - Identifies top safe zones in each individual metric
+### 🤖 Personalized Health Risk AI
+* **Dynamic Risk Scoring** - Calculates a personalized risk score (0-500) based on PM2.5 levels, seasonal pollen, and user-specific medical multipliers.
+* **Health Profiles** - Adapts warnings for specific conditions including Asthma, COPD, Allergies, Bronchitis, Heart Disease, and Pregnancy.
+* **Travel Mode Impact** - Adjusts risk calculations based on how you travel (e.g., Flight, Train, AC vs. Non-AC Vehicles).
 
-### 🎯 Interactive Visualizations
-* **Score Distribution Chart** - Visual representation of risk distribution using Folium
-* **Real-time Search** - Instant global location search functionality
-* **Tier Filtering** - Filter regions by performance tier
-* **Location Detail Cards** - Click any region to view complete metric breakdown
+### 🌪️ Real-Time Environmental Tracking
+* **Live AQI Integration** - Fetches real-time Air Quality Index and PM2.5/PM10 data via the OpenWeatherMap API.
+* **NASA Wildfire Detection** - Pulls real-time satellite data from NASA FIRMS to detect active fires within a 150km radius of your route.
+* **Historical Data Fallback** - Uses a rich, built-in database of seasonal air quality trends if live APIs are unavailable.
 
-### 💾 Data Management
-* **API Integration Support** - Accepts live data from NASA and OpenWeatherMap
-* **Export Functionality** - Download analyzed results as CSV
-* **Session Management** - Secure data handling with Streamlit sessions
+### 🏥 Global Emergency Network
+* **Interactive Route Mapping** - Visualizes your journey, air quality zones, and nearby wildfires using `folium` maps.
+* **WHO Facility Locator** - Automatically finds the nearest verified hospitals with ICU and Oxygen capabilities at your destination.
+* **Automated Emergency Protocols** - Generates one-click access to local emergency numbers (e.g., 911, 112, 1122) based on the destination country.
 
-### 🎨 Modern UI/UX
-* **Responsive Design** - Works seamlessly on desktop, tablet, and mobile
-* **Animated Counters** - Smooth number animations for statistics
-* **Dark Theme** - Professional cyberpunk-inspired interface
-* **Intuitive Navigation** - Clean, user-friendly layout
+### 🎨 Modern, Responsive UI/UX
+* **Custom Styling** - Features a beautiful, cyberpunk-inspired glassmorphism design with animated CSS elements.
+* **Visual Status Indicators** - Uses color-coded warning boxes, pulsing emergency buttons, and dynamic progress bars.
 
 ## 🚀 Technology Stack
-* **Backend:** Streamlit (Python)
-* **Data Processing:** Pandas, aiohttp
-* **Frontend:** HTML5, CSS3, JavaScript
-* **Visualization:** Folium
-* **AI Framework:** CrewAI, Groq LPU
 
-## 📦 Installation
+* **Frontend framework:** Streamlit
+* **Data Manipulation:** Pandas, NumPy
+* **Mapping & GIS:** Folium, Streamlit-Folium
+* **Asynchronous Networking:** `aiohttp`, `asyncio`, `requests`
+* **External APIs:** OpenWeatherMap API, NASA FIRMS (VIIRS/NOAA-20)
+* **Deployment Integration:** PyNgrok (for Google Colab)
+
+## 📦 Installation & Setup
 
 ### Prerequisites
 * Python 3.8 or higher
-* pip package manager
+* `pip` package manager
+* **OpenWeatherMap API Key** (Get a free key at [openweathermap.org](https://openweathermap.org/))
 
-### Setup
-
-Clone the repository
+### Local Setup
+Clone the repository:
 ```bash
 git clone [https://github.com/HamadAliRaza/Aero-Rescue-AI.git](https://github.com/HamadAliRaza/Aero-Rescue-AI.git)
 cd Aero-Rescue-AI
-Install dependencies
+```
+Install the required dependencies:
 
-Bash
-pip install streamlit pandas folium crewai groq
-Run the application
+```Bash
+pip install streamlit folium streamlit-folium pandas aiohttp requests numpy pillow
+```
+Set your API key as an environment variable:
 
-Bash
+Linux/Mac:
+
+```Bash
+export WEATHER_API_KEY="your_api_key_here"
+```
+Windows (Command Prompt):
+
+```DOS
+set WEATHER_API_KEY="your_api_key_here"
+```
+Run the application:
+
+```Bash
 streamlit run app.py
-Access the application
-Open your browser and navigate to: http://localhost:8501
+```
+## 📖 Usage
+Configure Your Journey: Select your Origin and Destination cities from the global sidebar.
 
-📖 Usage
-Input Data Format
-Your live API data processes the following columns:
+Set Your Profile: Choose your travel mode, specific medical condition, and condition severity (1-5).
 
-Location Name	AQI Score	Thermal Data	Wind Speed	Humidity
-String	Numeric	Numeric	Numeric	Numeric
-Performance Score Formula
-Score = (Thermal Data × 2.0) + (AQI Score × 1.5) + (Wind Speed × 1.2) + (Humidity × 1.0) - (Precipitation × 1.0)
+Simulate Scenarios (Optional): Toggle Wildfire, Smog, or Dust Storm events to see how environmental disasters would affect your route.
 
-This weighted formula emphasizes:
+Analyze: Click "ANALYZE SAFE ROUTE" to fetch live API data and generate your health safety verdict, interactive map, and emergency action plan.
 
-Thermal Data (2.0x) - High value on immediate fire threats
+## 📁 Project Structure
+Below is the organized directory layout for the Aero-Rescue AI platform.
 
-AQI Score (1.5x) - Heavily penalizes poor air quality
-
-Wind Speed (1.2x) - Values the spread potential of hazards
-
-Humidity (1.0x) - Standard respiratory metric
-
-Precipitation (-1.0x) - Reduces overall airborne risk
-
-Performance Tiers
-Elite Safe: Score ≤ 50% of average risk
-
-Strong Safe: Score ≤ 75% of average risk
-
-Average Risk: Score ≥ 85% of average risk
-
-Hazardous: Score ≥ 125% of average risk
-
-🎯 Features in Detail
-Search & Filter
-Real-time search by location name
-
-Filter by performance tier (Elite Safe, Strong Safe, Average Risk, Hazardous)
-
-Instant results with smooth animations
-
-Interactive Location Cards
-Click any region to view detailed breakdown
-
-Shows all individual metrics
-
-Modal overlay with professional design
-
-Visual Analytics
-Interactive map showing score distribution across ranges
-
-Category leader cards for top performers
-
-Animated statistics cards
-
-Export Capabilities
-One-click CSV export
-
-Preserves all calculated fields
-
-Formatted for further analysis
-
-📁 Project Structure
-Plaintext
+```Plaintext
 Aero-Rescue-AI/
-├── app.py                      # Streamlit application (backend/frontend)
-├── agents/
-│   └── health_analyst.py       # AI reasoning logic
-├── .env                        # Environment variables
-├── data_fetcher.py             # Basic API script
-├── map_generator.py            # Advanced visualization script
-├── README.md                   # Documentation
-└── safe_routes.csv             # Sample output
-🎓 Learning Outcomes
+├── app.py                      # Main Streamlit application and UI routing
+├── requirements.txt            # Python dependencies list
+├── README.md                   # Project documentation
+└── data/                       # (Optional) Local caches for historical AQI
+    └── static_city_data.json
+```
+## 🎓 Learning Outcomes
 This project demonstrates proficiency in:
 
-Full-Stack Web Development - Streamlit backend with modern frontend
+Asynchronous API Integration - Using aiohttp and asyncio to perform rapid, non-blocking calls to external weather APIs.
 
-Data Analysis - Pandas for data manipulation and statistics
+Data Science & GIS - Processing geographical coordinates and rendering complex data layers onto interactive Folium maps.
 
-UI/UX Design - Responsive, accessible interface design
+Algorithm Design - Creating a custom, weighted mathematical formula to calculate personal health risks based on multiple overlapping environmental variables.
 
-Algorithm Development - Custom scoring and classification systems
+UI/UX Engineering - Injecting custom CSS into Streamlit to completely overhaul the default look into a modern, production-ready web app.
 
-Software Architecture - Clean, maintainable code structure
+## 🔮 Future Enhancements
+Integrate flight API data to track actual flight paths and cabin pressure risks.
 
-Problem Solving - Real-world health analytics application
+Add a user authentication system to save persistent medical profiles and emergency contacts.
 
-🔮 Future Enhancements
-🌍 Location comparison feature (side-by-side analysis)
+Implement SMS notifications using Twilio to automatically alert emergency contacts if the "Activate Protocol" button is pressed.
 
-📈 Historical data tracking and trend analysis
-
-📊 Advanced visualizations (radar charts, heat maps)
-
-🧭 Safe route formation optimizer
-
-📄 PDF report generation
-
-🗄️ Database integration for persistent storage
-
-🔑 User authentication and saved analyses
-
-🔌 API endpoints for external integration
-
-👨‍💻 Author
+## 👨‍💻 Author
 Hamad Ali Raza
 
-GitHub: @HamadAliRaza
+GitHub: [@HamadAliRaza](https://github.com/SyedHamadAliRaza714)
 
-Project Link: Aero-Rescue AI Global
-
-📄 License
+Project Link: [Aero-Rescue AI Repository](https://github.com/SyedHamadAliRaza714/Aero-Rescue-AI)
+## 📄 License
 This project is open source and available under the MIT License.
 
-🙏 Acknowledgments
-Inspired by modern health analytics platforms
+## 🙏 Acknowledgments
+Live environmental data provided by OpenWeatherMap and NASA FIRMS.
 
-Built as a demonstration of full-stack AI development capabilities
-
-Designed for educational and portfolio purposes
-
-
-Would you like to do the **FinAgent Pro** README now using this exact layout?
+Designed to assist vulnerable individuals in navigating our changing global climate safely.
