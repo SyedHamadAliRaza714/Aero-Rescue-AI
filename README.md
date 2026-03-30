@@ -4,40 +4,40 @@
 
 An advanced, AI-driven web application for analyzing environmental risks and ensuring travel safety for individuals with respiratory conditions. Built with Python, Streamlit, and modern AI frameworks.
   
-##📋 Overview
+###📋 Overview
 
 Aero-Rescue AI is a comprehensive health and safety platform that processes real-time global environmental data and generates detailed risk insights, safe routing, and interactive geospatial visualizations. It features an intuitive web interface with autonomous AI processing and live data integration to protect vulnerable travelers.
 
 ✨ Key Features
 
-##📊 Advanced Analytics
+###📊 Advanced Analytics
 
 Multi-Metric Risk Assessment - Comprehensive analysis considering Air Quality Index (AQI), weather patterns, and active wildfires
 Safety Tier Classification - Automatic categorization into Safe, Moderate Risk, and Hazardous zones based on WHO guidelines
 Environmental Insights - Live tracking of threat levels with detailed medical action protocols
 Hazard Identification - Pinpoints primary environmental threats in the selected destination
 
-##🎯 Interactive Visualizations
+###🎯 Interactive Visualizations
 
 Geospatial Hazard Map - Visual representation of safe zones and danger perimeters using Folium
 Real-time Location Search - Instant environmental data retrieval for over 80+ countries
 Dynamic Data Rendering - Immediate visual feedback on changing atmospheric conditions
 Facility Locator - Identifies the nearest verified medical facilities on the interactive map
 
-##💾 Data Management
+###💾 Data Management
 
 Live API Integration - Asynchronous data fetching from NASA and OpenWeatherMap
 Global Database - Processes international environmental metrics in real-time
 Session Management - Secure and fast data handling within the Streamlit environment
 
-##🎨 Modern UI/UX
+###🎨 Modern UI/UX
 
 Responsive Design - Works seamlessly on desktop, tablet, and mobile
 Interactive Dashboards - Clean presentation of complex multi-agent AI reasoning
 Warning Systems - High-contrast visual alerts for severe environmental threats
 Intuitive Navigation - Clean, user-friendly layout designed for quick emergency access
 
-##🚀 Technology Stack
+###🚀 Technology Stack
 
 Backend & Frontend: Streamlit (Python)
 AI Processing: CrewAI, Groq LPU (Large Processing Unit)
@@ -45,7 +45,7 @@ Data Integration: aiohttp, REST APIs
 Visualization: Folium, Pandas
 Styling: Custom Streamlit UI elements
 
-##📦 Installation
+###📦 Installation
 
 Prerequisites
 
@@ -80,7 +80,7 @@ streamlit run app.py
 Access the application
 Open your browser and navigate to the local URL provided by Streamlit (usually http://localhost:8501)
 
-📖 Usage
+###📖 Usage
 
 Input Data Format
 
@@ -99,7 +99,7 @@ Safety Tiers
 Safe: Ideal conditions for individuals with Asthma/COPD.
 Moderate: Precautionary measures advised; rescue inhalers should be accessible.
 Hazardous: Travel highly discouraged; severe respiratory risk detected.
-##🎯 Features in Detail
+###🎯 Features in Detail
 
 Search & Filter
 
@@ -116,7 +116,7 @@ Visual Analytics
 Interactive Folium map showing exact hazard perimeters
 Animated indicators for active satellite thermal anomalies
 
-##📁 Project Structure
+###📁 Project Structure
 
 Aero-Rescue-AI/
 ├── app.py                      # Main Streamlit application
@@ -129,7 +129,7 @@ Aero-Rescue-AI/
 ├── .env.example                # Environment variables template
 └── README.md                   # Documentation
 
-##🎓 Learning Outcomes
+###🎓 Learning Outcomes
 
 This project demonstrates proficiency in:
 AI Engineering - Designing autonomous multi-agent systems using CrewAI
@@ -139,7 +139,7 @@ Geospatial Analysis - Plotting live satellite data on interactive maps
 Software Architecture - Clean, maintainable code structure for complex LLM tasks
 Problem Solving - Developing "AI for Social Good" to address real-world health crises
 
-##🔮 Future Enhancements
+###🔮 Future Enhancements
 
 Mobile application port for on-the-go access
 Integration with wearable health devices (Apple Watch, Fitbit)
@@ -147,17 +147,17 @@ Offline caching for limited-connectivity areas
 Push notifications for sudden AQI drops in the user's vicinity
 Multilingual support for global accessibility
 
-##👨‍💻 Author
+###👨‍💻 Author
 
 Hamad Ali Raza
 GitHub: @HamadAliRaza
 Project Link: Aero-Rescue AI Global
 
-##📄 License
+###📄 License
 
 This project is open source and available under the MIT License.
 
-##🙏 Acknowledgments
+###🙏 Acknowledgments
 
 Inspired by the need for accessible "AI for Social Good" tools
 Data provided by NASA FIRMS and OpenWeatherMap
