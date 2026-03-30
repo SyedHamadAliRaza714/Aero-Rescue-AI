@@ -1,164 +1,184 @@
-###🏆 Aero-Rescue AI Global
+# 🏆 Aero-Rescue AI Global
 
-[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)]([INSERT_YOUR_STREAMLIT_LINK_HERE])
-
-An advanced, AI-driven web application for analyzing environmental risks and ensuring travel safety for individuals with respiratory conditions. Built with Python, Streamlit, and modern AI frameworks.
+An advanced, data-driven web application for analyzing and ranking environmental safety across multiple metrics. Built with Streamlit, Python, and modern AI technologies.
   
-##📋 Overview ##
+## 📋 Overview
 
-Aero-Rescue AI is a comprehensive health and safety platform that processes real-time global environmental data and generates detailed risk insights, safe routing, and interactive geospatial visualizations. It features an intuitive web interface with autonomous AI processing and live data integration to protect vulnerable travelers.
+The Aero-Rescue AI is a comprehensive analytics platform that processes global environmental statistics and generates detailed safety insights, rankings, and visualizations. It features an intuitive web interface with real-time data processing and interactive analytics.
 
-✨ Key Features
+## ✨ Key Features
 
-###📊 Advanced Analytics
+### 📊 Advanced Analytics
+* **Multi-Metric Scoring System** - Weighted formula considering AQI, Thermal Anomalies, Wind Speed, and Humidity
+* **Performance Tier Classification** - Automatic categorization into Elite Safe, Strong Safe, Average, and Hazard tiers
+* **Statistical Insights** - Highest, lowest, and average risk scores with comprehensive breakdowns
+* **Category Leaders** - Identifies top safe zones in each individual metric
 
-Multi-Metric Risk Assessment - Comprehensive analysis considering Air Quality Index (AQI), weather patterns, and active wildfires
-Safety Tier Classification - Automatic categorization into Safe, Moderate Risk, and Hazardous zones based on WHO guidelines
-Environmental Insights - Live tracking of threat levels with detailed medical action protocols
-Hazard Identification - Pinpoints primary environmental threats in the selected destination
+### 🎯 Interactive Visualizations
+* **Score Distribution Chart** - Visual representation of risk distribution using Folium
+* **Real-time Search** - Instant global location search functionality
+* **Tier Filtering** - Filter regions by performance tier
+* **Location Detail Cards** - Click any region to view complete metric breakdown
 
-###🎯 Interactive Visualizations
+### 💾 Data Management
+* **API Integration Support** - Accepts live data from NASA and OpenWeatherMap
+* **Export Functionality** - Download analyzed results as CSV
+* **Session Management** - Secure data handling with Streamlit sessions
 
-Geospatial Hazard Map - Visual representation of safe zones and danger perimeters using Folium
-Real-time Location Search - Instant environmental data retrieval for over 80+ countries
-Dynamic Data Rendering - Immediate visual feedback on changing atmospheric conditions
-Facility Locator - Identifies the nearest verified medical facilities on the interactive map
+### 🎨 Modern UI/UX
+* **Responsive Design** - Works seamlessly on desktop, tablet, and mobile
+* **Animated Counters** - Smooth number animations for statistics
+* **Dark Theme** - Professional cyberpunk-inspired interface
+* **Intuitive Navigation** - Clean, user-friendly layout
 
-###💾 Data Management
+## 🚀 Technology Stack
+* **Backend:** Streamlit (Python)
+* **Data Processing:** Pandas, aiohttp
+* **Frontend:** HTML5, CSS3, JavaScript
+* **Visualization:** Folium
+* **AI Framework:** CrewAI, Groq LPU
 
-Live API Integration - Asynchronous data fetching from NASA and OpenWeatherMap
-Global Database - Processes international environmental metrics in real-time
-Session Management - Secure and fast data handling within the Streamlit environment
+## 📦 Installation
 
-###🎨 Modern UI/UX
+### Prerequisites
+* Python 3.8 or higher
+* pip package manager
 
-Responsive Design - Works seamlessly on desktop, tablet, and mobile
-Interactive Dashboards - Clean presentation of complex multi-agent AI reasoning
-Warning Systems - High-contrast visual alerts for severe environmental threats
-Intuitive Navigation - Clean, user-friendly layout designed for quick emergency access
-
-###🚀 Technology Stack
-
-Backend & Frontend: Streamlit (Python)
-AI Processing: CrewAI, Groq LPU (Large Processing Unit)
-Data Integration: aiohttp, REST APIs
-Visualization: Folium, Pandas
-Styling: Custom Streamlit UI elements
-
-###📦 Installation
-
-Prerequisites
-
-Python 3.8 or higher
-pip package manager
-
-Setup
+### Setup
 
 Clone the repository
 ```bash
 git clone [https://github.com/HamadAliRaza/Aero-Rescue-AI.git](https://github.com/HamadAliRaza/Aero-Rescue-AI.git)
 cd Aero-Rescue-AI
-```
 Install dependencies
 
-```Bash
-pip install -r requirements.txt
-```
-Set up Environment Variables
-Create a .env file in the root directory and add your API keys:
-```Bash
-Ini, TOML
-GROQ_API_KEY=your_groq_api_key
-OPENWEATHER_API_KEY=your_openweather_api_key
-NASA_FIRMS_KEY=your_nasa_api_key
-```
+Bash
+pip install streamlit pandas folium crewai groq
 Run the application
 
-```Bash
+Bash
 streamlit run app.py
-```
 Access the application
-Open your browser and navigate to the local URL provided by Streamlit (usually http://localhost:8501)
+Open your browser and navigate to: http://localhost:8501
 
-###📖 Usage
-
+📖 Usage
 Input Data Format
+Your live API data processes the following columns:
 
-Users simply input their intended travel destination. The system autonomously fetches:
-LocationCoordinatesAQI StatusThermal AnomaliesCity/CountryLatitude/LongitudeNumeric (0-500)Active NASA Fire Data
+Location Name	AQI Score	Thermal Data	Wind Speed	Humidity
+String	Numeric	Numeric	Numeric	Numeric
+Performance Score Formula
+Score = (Thermal Data × 2.0) + (AQI Score × 1.5) + (Wind Speed × 1.2) + (Humidity × 1.0) - (Precipitation × 1.0)
 
-Risk Assessment Logic
+This weighted formula emphasizes:
 
-The AI processes data through a multi-agent framework:
-Data Gatherer Agent - Pulls raw API metrics (Weather, Fires, Pollution).
-Medical Analyst Agent - Compares raw data against WHO respiratory health guidelines.
-Routing Agent - Determines safe perimeters and flags emergency facility locations.
+Thermal Data (2.0x) - High value on immediate fire threats
 
-Safety Tiers
+AQI Score (1.5x) - Heavily penalizes poor air quality
 
-Safe: Ideal conditions for individuals with Asthma/COPD.
-Moderate: Precautionary measures advised; rescue inhalers should be accessible.
-Hazardous: Travel highly discouraged; severe respiratory risk detected.
-###🎯 Features in Detail
+Wind Speed (1.2x) - Values the spread potential of hazards
 
+Humidity (1.0x) - Standard respiratory metric
+
+Precipitation (-1.0x) - Reduces overall airborne risk
+
+Performance Tiers
+Elite Safe: Score ≤ 50% of average risk
+
+Strong Safe: Score ≤ 75% of average risk
+
+Average Risk: Score ≥ 85% of average risk
+
+Hazardous: Score ≥ 125% of average risk
+
+🎯 Features in Detail
 Search & Filter
+Real-time search by location name
 
-Real-time search by global city or country
-Instant results powered by Groq's high-speed LPUs
+Filter by performance tier (Elite Safe, Strong Safe, Average Risk, Hazardous)
 
-Interactive Risk Cards
+Instant results with smooth animations
 
-View detailed breakdowns of specific pollutants (PM2.5, PM10, Ozone)
-Modal overlays containing emergency WHO protocols
+Interactive Location Cards
+Click any region to view detailed breakdown
+
+Shows all individual metrics
+
+Modal overlay with professional design
 
 Visual Analytics
+Interactive map showing score distribution across ranges
 
-Interactive Folium map showing exact hazard perimeters
-Animated indicators for active satellite thermal anomalies
+Category leader cards for top performers
 
-###📁 Project Structure
+Animated statistics cards
 
+Export Capabilities
+One-click CSV export
+
+Preserves all calculated fields
+
+Formatted for further analysis
+
+📁 Project Structure
+Plaintext
 Aero-Rescue-AI/
-├── app.py                      # Main Streamlit application
+├── app.py                      # Streamlit application (backend/frontend)
 ├── agents/
-│   ├── data_gatherer.py        # API fetching logic
-│   └── health_analyst.py       # CrewAI reasoning logic
-├── utils/
-│   └── map_generator.py        # Folium visualization setup
-├── requirements.txt            # Project dependencies
-├── .env.example                # Environment variables template
-└── README.md                   # Documentation
-
-###🎓 Learning Outcomes
-
+│   └── health_analyst.py       # AI reasoning logic
+├── .env                        # Environment variables
+├── data_fetcher.py             # Basic API script
+├── map_generator.py            # Advanced visualization script
+├── README.md                   # Documentation
+└── safe_routes.csv             # Sample output
+🎓 Learning Outcomes
 This project demonstrates proficiency in:
-AI Engineering - Designing autonomous multi-agent systems using CrewAI
-Full-Stack Python Development - Streamlit architecture and deployment
-Data Engineering - Asynchronous API integration (aiohttp) and JSON parsing
-Geospatial Analysis - Plotting live satellite data on interactive maps
-Software Architecture - Clean, maintainable code structure for complex LLM tasks
-Problem Solving - Developing "AI for Social Good" to address real-world health crises
 
-###🔮 Future Enhancements
+Full-Stack Web Development - Streamlit backend with modern frontend
 
-Mobile application port for on-the-go access
-Integration with wearable health devices (Apple Watch, Fitbit)
-Offline caching for limited-connectivity areas
-Push notifications for sudden AQI drops in the user's vicinity
-Multilingual support for global accessibility
+Data Analysis - Pandas for data manipulation and statistics
 
-###👨‍💻 Author
+UI/UX Design - Responsive, accessible interface design
 
+Algorithm Development - Custom scoring and classification systems
+
+Software Architecture - Clean, maintainable code structure
+
+Problem Solving - Real-world health analytics application
+
+🔮 Future Enhancements
+🌍 Location comparison feature (side-by-side analysis)
+
+📈 Historical data tracking and trend analysis
+
+📊 Advanced visualizations (radar charts, heat maps)
+
+🧭 Safe route formation optimizer
+
+📄 PDF report generation
+
+🗄️ Database integration for persistent storage
+
+🔑 User authentication and saved analyses
+
+🔌 API endpoints for external integration
+
+👨‍💻 Author
 Hamad Ali Raza
+
 GitHub: @HamadAliRaza
+
 Project Link: Aero-Rescue AI Global
 
-###📄 License
-
+📄 License
 This project is open source and available under the MIT License.
 
-###🙏 Acknowledgments
+🙏 Acknowledgments
+Inspired by modern health analytics platforms
 
-Inspired by the need for accessible "AI for Social Good" tools
-Data provided by NASA FIRMS and OpenWeatherMap
-Built as a demonstration of advanced multi-agent AI capabilities
+Built as a demonstration of full-stack AI development capabilities
+
+Designed for educational and portfolio purposes
+
+
+Would you like to do the **FinAgent Pro** README now using this exact layout?
